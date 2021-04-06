@@ -1,0 +1,12 @@
+
+<img #myImage class="img-fit pos-fixed" [src]="picture.src">
+<div class="menu">
+  <div class ="row below ta-c">
+    <div class="col s6">
+      <app-delete-btn (click)='goToCamera()'></app-delete-btn>
+    </div>
+    <div class="col s6">
+      <app-validate-btn (click)='goToForm()'></app-validate-btn>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="row">
+  <div>
+    <img class="img-fit" [src]="picture.src">
+  </div>
+  <div class="form s12 m8 offset-m2">
+    <label>Type</label>
+    <select class="browser-default" [(ngModel)]="form.type">
+      <option value="" disabled selected>Choose</option>
+      <option value="received">Received receipt</option>
+      <option value="sent">Issued receipt</option>
+    </select>
+    <p class="error-color" *ngIf="errorList['type']">{{errorMessage}}</p>
+
+    <label>Language</label>
+    <select class="browser-default" [(ngModel)]="form.language">
+      <option value="" disabled selected>Choose</option>
+      <option value="french">French</option>
+    </select>
+    <p class="error-color" *ngIf="errorList['language']">{{errorMessage}}</p>
+
+    <label>Save in which folder</label>
+    <select class="browser-default" [(ngModel)]="form.folderName">
+      <option value="" disabled selected>Choose</option>
+      <option [value]="folder.name" *ngFor="let folder of folderList">
+        {{ folder.name }}
+      </option>
+    </select>
+    <p class="error-color" *ngIf="errorList['folderName']">{{errorMessage}}</p>
+    <div>
+      <label>File name</label>
+      <input #myInput type="text" [(ngModel)]="form.fileName" placeholder="File name">
+    </div>
+    <p class="error-color" *ngIf="errorList['fileName']">{{errorMessageFileName}}</p>
+  </div>
+</div>
+
+
+<div class="row ta-c">
+  <div class="col s12 l6 offset-l3">
+    <input class="waves-effect waves-light btn" type="submit" value = "Analyse" (click)="validate()">
+  </div>
+</div>

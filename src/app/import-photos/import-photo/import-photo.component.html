@@ -1,0 +1,24 @@
+<div class="container">
+    <div class = "row">
+      <div class = "file-field input-field">
+          <div class = "btn">
+            <span>Import</span>
+            <input #myInput class="input-file" type = "file" accept="image/png, image/jpeg" [(ngModel)]="selectedFile" (ngModelChange)="handleFile($event)"/>
+          </div>
+          <div class = "file-path-wrapper">
+            <input class = "file-path validate" type = "text"
+                placeholder = "Upload file"/>
+          </div>
+      </div>
+    </div>
+    <div class="col s12 l6 offset-l3">
+        <img class="img-fit" #myImage/>
+    </div>
+</div>
+
+
+<div class ="row below ta-c" *ngIf="file">
+    <div class="col s12">
+      <app-validate-btn (click)="validate()"></app-validate-btn>
+    </div>
+</div>

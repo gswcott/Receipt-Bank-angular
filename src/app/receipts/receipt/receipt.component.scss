@@ -1,0 +1,18 @@
+.non-editable{
+    border: 3px solid yellow;
+}
+
+.editable{
+    border: 3px solid green;
+}
+
+
+.menu{
+  background-color: rgb(231, 231, 235);
+  padding: 1rem 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}

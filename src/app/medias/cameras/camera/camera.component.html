@@ -1,0 +1,5 @@
+<app-loading *ngIf="isLoading"></app-loading>
+<canvas #myCanvas></canvas>
+<video #myVideo class="pos-fixed" [width]="videoWidth" [width]="videoWidth" [height]="videoHeight"></video>
+<app-camera-btn *ngIf="!isLoading && !havingError" (click)="takePicture(myCanvas, myVideo)"></app-camera-btn>
+<app-autorization-modal *ngIf="havingError"></app-autorization-modal>

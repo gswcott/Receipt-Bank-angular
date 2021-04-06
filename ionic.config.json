@@ -1,5 +1,7 @@
 {
   "name": "receipt-bank-angular",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

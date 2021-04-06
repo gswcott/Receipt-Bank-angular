@@ -1,0 +1,28 @@
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <a class="brand-logo" (click) = "goToFolderList()">Receipt Bank</a>
+            <a data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="left hide-on-med-and-down">
+              <!-- <li>
+                <div class = "file-field input-field">
+                  <div class = "btn">
+                    <span>Import</span>
+                    <input #myInput class="input-file" type = "file" accept="image/png, image/jpeg" [(ngModel)]="selectedFile" (ngModelChange)="handleFile($event)"/>
+                  </div>
+                  <div class = "file-path-wrapper">
+                    <input class = "file-path validate" type = "text"
+                        placeholder = "Upload file"/>
+                  </div>
+                </div>
+              </li> -->
+              <li class="link" (click)="goToImport()"><a>Import a photo</a></li>
+              <li class="link"><a>Assistance</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<ul class="sidenav" id="mobile-demo">
+  <li class="link" (click)="goToImport()"><a>Import a photo</a></li>
+  <li class="link"><a>Assistance</a></li>
+</ul>

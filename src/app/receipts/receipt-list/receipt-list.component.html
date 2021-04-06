@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col s12 m8 offset-m2">
+        <legend style="width: 100%;">Folder: {{folderName}}</legend>
+    </div>
+    <div class="form col s12 m8 offset-m2">
+        <p *ngFor="let receipt of receiptListFolder">
+            <label>
+                <!-- <input type="checkbox" [(ngModel)]="isChecked[receipt.id]"/>  -->
+                <input type="checkbox" [(ngModel)]="isChecked[receipt.id]" (ngModelChange)="updateCheckedIds($event)"/>
+                <span>{{receipt.fileName}}</span>
+            </label>
+            <!-- <span [title]="isChecked[receipt.id]">{{isChecked[receipt.id]}}</span> -->
+        </p>
+    </div>
+</div>
+
+
+
+<div class="menu" *ngIf="checkedIds.length>0">
+    <div class="container">
+        <div class="row center">
+          <div class="col s3">
+            <app-detail-file-btn (click)="goToReceiptDetail()"></app-detail-file-btn>
+          </div>
+          <div class="col s3">
+            <app-share-btn></app-share-btn>
+          </div>
+          <div class="col s3">
+            <app-download-btn></app-download-btn>
+          </div>
+          <div class="col s3">
+            <app-delete-btn (click)="deleteFiles()"></app-delete-btn>
+          </div>
+        </div>
+    </div>
+</div>
