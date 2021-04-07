@@ -10,14 +10,7 @@ import { Subject } from 'rxjs';
 export class ReceiptService {
   private receipt: Receipt = new Receipt();
   public subject: Subject<Receipt> = new Subject();
-  //dictReceipts: Object = {};
   constructor() {
-    // if (typeof (Storage) != "undefined") {
-    //   if (localStorage.receiptBank01) {
-    //     this.dictReceipts = JSON.parse(localStorage.receiptBank01);
-    //   }
-    // }
-    //this.scanLines(this.receipt.textOCR);
   }
   getReceipt() {
     return this.receipt;
@@ -34,14 +27,6 @@ export class ReceiptService {
 
   changeValue(key: string, value: string) {
     this.receipt[key as keyof Receipt] = value;
-    this.subject.next(this.receipt);
-  }
-
-  setValuesForm(form: Form, src: string) {
-    Object.keys(form).forEach(key =>{
-      this.setValue(key, form[key]);
-    })
-    this.setValue('imgSrc', src);
     this.subject.next(this.receipt);
   }
   isKeyDate(line: string) {
@@ -64,7 +49,7 @@ export class ReceiptService {
       }
     }
   }
-  //Siren
+
   isKeySiren(line: string) {
     if (line.match(/SIREN|SIRET/i)) {
       return true;
@@ -80,7 +65,6 @@ export class ReceiptService {
     }
   }
 
-  // total tva ttc
   extractPrice(line: string) {
     const res = line.match(/\d+(,|\.)*\d+\s*€*/g);
     if (res) {
@@ -113,7 +97,6 @@ export class ReceiptService {
       this.setValue('exclTax', this.extractPrice(line));
     }
   }
-  // "TOTAL(\s)?([HORS(\s)TAXE]{5,}|HT)([\s\S]*?)(€|E|euros)"
 
   isKeyInclTax(line: string) {
     if (!this.isKeyExclTax(line) && line.match(/TOTA.\s*(TTC)*/i)) {
@@ -196,13 +179,10 @@ export class ReceiptService {
   }
 
   scanLines(text: string) {
-    //console.log(JSON.stringify(text));
     const arrayLines = text.split(/\n+/);
-    //console.log(arrayLines);
     if (!arrayLines[arrayLines.length - 1]) {
       arrayLines.pop();
     }
-    //console.log(arrayLines);
     this.setValueAddress(arrayLines);
     arrayLines.forEach((line) => {
       this.setSirenNumber(line);
@@ -216,12 +196,10 @@ export class ReceiptService {
   extractText() {
     Tesseract.recognize(this.receipt.imgSrc, 'fra', {
       logger: (m) => {
-        //console.log(m);
       },
     }).then(({ data: { text } }) => {
       this.scanLines(text);
       this.subject.next(this.receipt);
-      //this.affectValues();
     });
   }
   affectValueId(){
@@ -231,6 +209,13 @@ export class ReceiptService {
     + date.getMinutes().toString() + "-" + date.getSeconds().toString();
     this.setValue("id", id);
   }
+  setValuesForm(form: Form, src: string) {
+    Object.keys(form).forEach(key =>{
+      this.setValue(key, form[key]);
+    })
+    this.setValue('imgSrc', src);
+    this.subject.next(this.receipt);
+  }
 
   startAnalyseExtract(form: Form, src: string){
     this.receipt = new Receipt();
@@ -239,10 +224,3 @@ export class ReceiptService {
     this.extractText();
   }
 }
-
-
-// storeReceipt(fileName:string){
-//   this.dictReceipts[fileName as keyof Receipt] = this.receipt;
-//   localStorage.receiptBank01=JSON.stringify(dictReceipts);
-// }
-// Date

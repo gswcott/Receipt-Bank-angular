@@ -17,9 +17,7 @@ export class ImportPhotoComponent implements OnInit {
   constructor(private router: Router, private pictureService: PictureService) { }
 
   handleFile(newValue: any) {
-    //console.log("Bonjour", this.myInput.nativeElement);
     this.file = this.myInput.nativeElement.files[0];
-    //console.log("hello", this.file);
     if (this.file.type.startsWith('image/')) {
       this.myImage.nativeElement.file = this.file;
       const reader = new FileReader();

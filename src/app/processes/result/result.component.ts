@@ -50,7 +50,7 @@ export class ResultComponent implements OnInit {
     return dict;
   }
 
-  activeDivEditable(key: string, myDiv: any){
+  activateDivEditable(key: string, myDiv: any){
     this.displayList.forEach(item => {
       if(item["attribut"] === key){
         item["editable"] = true;
@@ -60,7 +60,7 @@ export class ResultComponent implements OnInit {
       myDiv.focus();
     },0);
   }
-  desactiveDivEditable(key: string, value: string){
+  desactivateDivEditable(key: string, value: string){
     this.displayList.forEach(item => {
       if(item["attribut"] === key){
         item["editable"] = false;

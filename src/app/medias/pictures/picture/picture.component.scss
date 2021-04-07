@@ -1,10 +1,25 @@
 
 .menu{
-  background-color: rgb(231, 231, 235);
+  //background-color: rgb(231, 231, 235);
   padding: 1rem 0;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 1;
+}
+
+.bg-black{
+  height: 100vh;
+  background-color: black;
+}
+
+img{
+  width: 100%;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }

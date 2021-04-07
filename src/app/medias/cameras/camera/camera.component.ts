@@ -13,47 +13,46 @@ import * as M from 'materialize-css';
 })
 export class CameraComponent implements OnInit, AfterViewInit {
   @ViewChild("myVideo") myVideo!: ElementRef;
-  public isLoading: boolean = true;
-  public havingError: boolean = false;
-  public videoWidth: number = 320;
-  public videoHeight: number = 0;
+  @ViewChild("myModal") myModal!: ElementRef;
+  public isLoading: boolean = false;
+  public cameraAutorized: boolean = false;
   constructor(private router: Router, private pictureService: PictureService, private cameraService: CameraService) {
-  }
-  takePicture(elemCan: HTMLCanvasElement, elemVideo: HTMLVideoElement) {
-    elemCan.width = elemVideo.videoWidth;
-    elemCan.height = elemVideo.videoHeight;
-    elemCan.getContext("2d")?.drawImage(elemVideo, 0, 0, elemCan.width, elemCan.height);
-    this.pictureService.setSrcValue(elemCan.toDataURL("image/png"));
-    this.goToPicture();
-  }
-  goToPicture() {
-    this.router.navigate(["medias", "pictures", "picture"]);
   }
   ngOnInit(): void {
     M.AutoInit();
   }
-  activeCamera(){
-    this.cameraService.activeCamera().subscribe(
+  ngAfterViewInit(): void{
+    this.activateCamera();
+  }
+  activateCamera(){
+    if (window["cordova"]) {;
+      this.grantPermission();
+    } else {
+      this.startCamera();
+    }
+  }
+  grantPermission() {
+    window["cordova"].plugins.diagnostic.requestRuntimePermission(
+      (status) => status == window["cordova"].plugins.diagnostic.permissionStatus.GRANTED
+        ? this.startCamera()
+        : this.openModal(),
+      () => alert('Camera error'),
+      "CAMERA"
+    );
+  }
+  startCamera(){
+    this.cameraService.startCamera().subscribe(
       (camera: Camera) =>{
-        this.havingError = camera.havingError;
-        if(camera.havingError){
+        if(!camera.stream.active){
+          this.cameraAutorized = false;
           this.isLoading = false;
+          this.openModal();
           return;
         }
+        this.cameraAutorized = true;
+        this.isLoading = true;
         this.myVideo.nativeElement.onloadedmetadata = () => {
           this.myVideo.nativeElement.play();
-          const wi = this.myVideo.nativeElement.videoWidth;
-          const hi = this.myVideo.nativeElement.videoHeight;
-          const ri = wi/hi;
-          const rs = screen.width/screen.height;
-          if(rs>ri) {
-            this.videoWidth = wi*screen.height/hi;
-            this.videoHeight = screen.height;
-          }else{
-            this.videoWidth = screen.width;
-            this.videoHeight = hi*screen.width/wi;
-          }
-          alert("finally "+this.videoWidth + "," + this.videoHeight);
           this.isLoading = false;
         };
         if ("srcObject" in this.myVideo.nativeElement) {
@@ -66,26 +65,25 @@ export class CameraComponent implements OnInit, AfterViewInit {
       }
     )
   }
-  grantPermission() {
-    window["cordova"].plugins.diagnostic.requestRuntimePermission(
-      (status) => status == window["cordova"].plugins.diagnostic.permissionStatus.GRANTED
-        ? this.activeCamera()
-        : alert('Need authorization'),
-      () => alert('Camera error'),
-      "CAMERA"
-    );
+  openModal(){
+    const modal = M.Modal.init(this.myModal.nativeElement);
+    modal.open();
   }
-  ngAfterViewInit(): void{
-    this.isLoading = true;
-    if (window["cordova"]) {;
-      this.grantPermission();
-    } else {
-      this.activeCamera();
-    }
+
+
+  takePicture(elemCan: HTMLCanvasElement, elemVideo: HTMLVideoElement) {
+    elemCan.width = elemVideo.videoWidth;
+    elemCan.height = elemVideo.videoHeight;
+    elemCan.getContext("2d")?.drawImage(elemVideo, 0, 0, elemCan.width, elemCan.height);
+    this.pictureService.setSrcValue(elemCan.toDataURL("image/png"));
+    this.goToPicture();
   }
+  goToPicture() {
+    this.router.navigate(["medias", "pictures", "picture"]);
+  }
+  goToHome(){
+    this.router.navigate(["receipts", "folder-list"]);
+  }
+
 }
 
-// public top: number = 0;
-// public left: number = 0;
-// this.top = (screen.height-this.videoHeight)/2;
-// this.left = (screen.width-this.videoWidth)/2;

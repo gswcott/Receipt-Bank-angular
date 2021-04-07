@@ -1,7 +1,15 @@
 <app-loading *ngIf="isLoading"></app-loading>
 <canvas #myCanvas></canvas>
-<video #myVideo class="pos-fixed" [width]="videoWidth" [width]="videoWidth" [height]="videoHeight"></video>
+<video #myVideo></video>
 <div class="action">
-  <button class="take-picture" (click)="takePicture(myCanvas, myVideo)" *ngIf="!isLoading && !havingError"><span class="material-icons">camera</span></button>
+  <button class="take-picture" (click)="takePicture(myCanvas, myVideo)" *ngIf="!isLoading && cameraAutorized"><span class="material-icons">camera</span></button>
 </div>
-<app-autorization-modal *ngIf="havingError"></app-autorization-modal>
+
+<div class="modal" #myModal>
+  <div class="modal-content">
+    L'application a besoin de votre autorisation pour fonctionner.
+  </div>
+  <div class="modal-footer">
+    <a class="modal-close waves-effect waves-green btn-flat activate" (click)="goToHome()">Okay</a>
+  </div>
+</div>

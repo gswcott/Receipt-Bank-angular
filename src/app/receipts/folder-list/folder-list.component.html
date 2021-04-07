@@ -1,20 +1,19 @@
 <a class="btn-floating btn-flat waves-effect waves-light green modal-trigger" href="#modal1" (click)="changeErrorMessage()"><i
   class="material-icons">create_new_folder</i></a>
 
-<!-- Modal Structure -->
 <div id="modal1" #myModal class="modal">
-<div class="modal-content">
-<h5>Folder name: </h5>
-<div class="input-field col s6">
-    <input #myInput type="text" [(ngModel)]="newFolderName" (ngModelChange)="changeErrorMessage()"
+  <div class="modal-content">
+    <h5>Folder name: </h5>
+    <div class="input-field col s6">
+      <input #myInput type="text" [(ngModel)]="newFolderName" (ngModelChange)="changeErrorMessage()"
         placeholder="Nom du dossier"/>
-</div>
-<p class="error-color" *ngIf="errorMessage">{{errorMessage}}</p>
-</div>
-<div class="modal-footer">
-  <button (click)="addFolder()" [disabled]="errorMessage || !myInput.value"
+    </div>
+    <p class="error-color" *ngIf="errorMessage">{{errorMessage}}</p>
+  </div>
+  <div class="modal-footer">
+    <button (click)="addFolder()" [disabled]="errorMessage || !myInput.value"
       class="modal-close waves-effect waves-green btn-flat">Ok</button>
-</div>
+  </div>
 </div>
 
 <div class="container">

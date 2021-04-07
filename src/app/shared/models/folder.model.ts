@@ -1,3 +1,3 @@
 export class Folder {
-    name: string =""; 
+  name: string ="";
 }

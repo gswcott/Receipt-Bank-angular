@@ -28,9 +28,8 @@ export class CameraService {
       }
     }
   }
-  activeCamera(): Subject<Camera> {
-    navigator.mediaDevices
-      .getUserMedia(this.constraints)
+  startCamera(): Subject<Camera> {
+    navigator.mediaDevices.getUserMedia(this.constraints)
       .then((stream) => {
         this.camera = new Camera();
         this.camera.stream = stream;
@@ -38,7 +37,6 @@ export class CameraService {
       })
       .catch((err) => {
         this.camera = new Camera();
-        this.camera.havingError = true;
         this.subject.next(this.camera);
       });
     return this.subject;

@@ -1,3 +1,3 @@
 export class Picture {
-    src: string = ""; 
+  src: string = "";
 }

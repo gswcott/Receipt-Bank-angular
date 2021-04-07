@@ -1,174 +1,86 @@
-
-// /* Core CSS required for Ionic components to work properly */
-// @import "~@ionic/angular/css/core.css";
-
-// /* Basic CSS for apps built with Ionic */
-// @import "~@ionic/angular/css/normalize.css";
-// @import "~@ionic/angular/css/structure.css";
-// @import "~@ionic/angular/css/typography.css";
-// @import '~@ionic/angular/css/display.css';
-
-// /* Optional CSS utils that can be commented out */
-// @import "~@ionic/angular/css/padding.css";
-// @import "~@ionic/angular/css/float-elements.css";
-// @import "~@ionic/angular/css/text-alignment.css";
-// @import "~@ionic/angular/css/text-transformation.css";
-// @import "~@ionic/angular/css/flex-utils.css";
-
-@import '~material-design-icons/iconfont/material-icons.css';
-@import '~materialize-css/dist/css/materialize.min.css';
-
-
+@import "~material-design-icons/iconfont/material-icons.css";
+@import "~materialize-css/dist/css/materialize.min.css";
 
 $primary: #01579b;
-$primary-light: #4f83cc;
-$primary-dark: #002f6c;
-$secondary: #c2185b;
-$secondary-light: #fa5788;
-$secondary-dark: #8c0032;
-$text-color: #fafafa;
 $background: #fafafa;
 
 body {
-    background-color: $background;
-    font-size: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-        "Helvetica Neue", sans-serif;
-    min-height: 100vh;
-    // display: flex;
-    // flex-direction: column;
+  background-color: $background;
+  font-size: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  min-height: 100vh;
 }
-
 
 nav {
-    background-color: $primary !important;
-    // padding-left: 1.25em;
+  background-color: $primary !important;
 }
 
-
-.camera {
-    background-color: $secondary;
-    position: fixed;
-    bottom: 3%;
+.sidenav {
+  background: #fafafa;
+  padding-top: 2em;
 }
 
-.camera:hover {
-    background-color: $secondary-dark;
+.material-icons {
+  color: white;
+  vertical-align: middle;
 }
 
-.teal {
-    text-align: center;
+label,
+span {
+  font-size: 1.1em;
+  color: black;
 }
 
-.bg-color {
-    background-color: #90cc33;
-}
-
-label, span {
-    font-size: 1.1em;
-    color: black;
-}
 legend {
-    font-weight: bold;
-    font-size: 1.5em;
-}
-// form {
-//     text-align: center;
-//     background-color: rgb(233, 240, 216);
-// }
-
-section {
-    position: relative;
+  font-weight: bold;
+  font-size: 1.5em;
 }
 
-.vh-40 {
-    height: 40vh;
+.row {
+  margin: 0;
+}
+.col {
+  margin: 0;
 }
 
-.vh-10 {
-    height: 10vh;
+.form {
+  text-align: center;
+  background-color: rgb(233, 240, 216);
 }
 
-.above {
-    z-index: 1;
+.tab-buttons {
+  background-color: rgb(231, 231, 235);
+  padding: 1rem 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  height: 10vh;
 }
 
-.fixed {
-    position: fixed;
+.action {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding: 1rem 0;
+  z-index: 1;
 }
 
-.left{
-    float: left;
-}
-
-.ta-c {
-    text-align: center;
-}
-
-.relative {
-    width: 100%;
-    position: relative;
-    height: 80vh;
-    top: 10vh;
-}
-
-.absolute {
-    height: 100%;
-    position: absolute;
-    width: 100%;
-}
-
-.sidenav{
-    background: #fafafa;
-    padding-top: 2em;
-}
-
-.material-icons{
-    color: white;
-    vertical-align: middle;
-}
-
-.below{
-    z-index: 1;
-    position: relative;
-    bottom: 5%;
-}
-
-.action{
-    text-align: center;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-}
-
-.take-picture{
-    background: #1488CC;
-    border-color: #1488CC;
-    width: 60px;
-    height: 60px;
-    border-radius: 5rem;
-    margin: 20px;
+.take-picture {
+  background: #1488cc;
+  border-color: #1488cc;
+  width: 60px;
+  height: 60px;
+  border-radius: 5rem;
 }
 
 .img-fit {
   width: 100%;
 }
-.pos-fixed{
-  position: fixed;
-}
-.row {
-    margin: 0;
-}
-.col {
-    margin: 0;
-}
 
-.form {
-    text-align: center;
-    background-color: rgb(233, 240, 216);
-}
-
-
-canvas{
-    display: none;
+.ta-c {
+  text-align: center;
 }

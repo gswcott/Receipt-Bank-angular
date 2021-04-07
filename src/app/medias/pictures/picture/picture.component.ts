@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Picture } from 'src/app/shared/models/picture.model';
+import { Receipt } from 'src/app/shared/models/receipt.model';
 import { PictureService } from 'src/app/shared/services/picture.service';
 
 @Component({
@@ -11,9 +13,8 @@ import { PictureService } from 'src/app/shared/services/picture.service';
 export class PictureComponent implements OnInit{
   @ViewChild("myImage") myImage!: ElementRef;
   public picture: Picture;
-  // public top: number = 50;
-  // public left: number = 0;
-  constructor(private router: Router, private pictureSerivce: PictureService) {
+  constructor(private router: Router, private pictureSerivce: PictureService,
+    private httpservice: HttpClient) {
     this.picture = this.pictureSerivce.getPicture();
     this.pictureSerivce.getSubject().subscribe((picture:Picture)=>
     {
@@ -28,8 +29,5 @@ export class PictureComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    // this.top = (screen.height- this.myImage.nativeElement.height)/2;
-    // this.left = (screen.width- this.myImage.nativeElement.width)/2;
-    // console.log(this.top);
   }
 }
