@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Receipt } from '../models/receipt.model';
+import { SharedRoutingModule } from '../shared-routing.module';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReceiptListService {
 
-  private receiptList: Receipt[] = [];
+  private receiptList: Receipt[]=[];
   constructor() {
   }
   getReceiptList(){

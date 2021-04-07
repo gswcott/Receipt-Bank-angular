@@ -4,7 +4,6 @@ import { Form } from 'src/app/shared/models/form.model';
 import { Picture } from 'src/app/shared/models/picture.model';
 import { Receipt } from 'src/app/shared/models/receipt.model';
 import { FormService } from 'src/app/shared/services/form.service';
-import { LoadingService } from 'src/app/shared/services/loading.service';
 import { PictureService } from 'src/app/shared/services/picture.service';
 import { ReceiptListService } from 'src/app/shared/services/receipt-list.service';
 import { ReceiptService } from 'src/app/shared/services/receipt.service';
@@ -24,7 +23,7 @@ export class ResultComponent implements OnInit {
                     vatRate: "Tax rate", vat: "Tax", inclTax: "Total (including tax)"};
   public displayList: {}[] = [];
   public form : Form = new Form();
-  constructor(private router: Router, private loadingService: LoadingService, private formService: FormService,
+  constructor(private router: Router, private formService: FormService,
     private pictureService: PictureService, private receiptService: ReceiptService, private receiptListService: ReceiptListService) {
     let listKeys = Object.keys(this.receipt);
     listKeys = listKeys.filter(item => !["id","folderName", "fileName", "type", "imgSrc"].includes(item));
@@ -33,14 +32,13 @@ export class ResultComponent implements OnInit {
     })
     this.picture = this.pictureService.getPicture();
     if(this.picture.src){
-      this.isLoading = this.loadingService.startLoading();
+      this.isLoading = true;
       this.form = this.formService.getForm(),
       this.receiptService.startAnalyseExtract(this.form, this.picture.src);
-
     }
     this.receiptService.getSubject().subscribe((receipt: Receipt)=>{
       this.receipt = receipt;
-      this.isLoading = this.loadingService.stopLoading();
+      this.isLoading = false;
     });
   }
 

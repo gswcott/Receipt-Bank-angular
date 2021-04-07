@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { Router } from '@angular/router';
 import { Camera } from 'src/app/shared/models/camera.model';
 import { CameraService } from 'src/app/shared/services/camera.service';
-import { LoadingService } from 'src/app/shared/services/loading.service';
 import { PictureService } from 'src/app/shared/services/picture.service';
 import * as M from 'materialize-css';
 
@@ -18,8 +17,7 @@ export class CameraComponent implements OnInit, AfterViewInit {
   public havingError: boolean = false;
   public videoWidth: number = 320;
   public videoHeight: number = 0;
-
-  constructor(private router: Router, private loadingService: LoadingService, private pictureService: PictureService, private cameraService: CameraService) {
+  constructor(private router: Router, private pictureService: PictureService, private cameraService: CameraService) {
   }
   takePicture(elemCan: HTMLCanvasElement, elemVideo: HTMLVideoElement) {
     elemCan.width = elemVideo.videoWidth;
@@ -28,7 +26,6 @@ export class CameraComponent implements OnInit, AfterViewInit {
     this.pictureService.setSrcValue(elemCan.toDataURL("image/png"));
     this.goToPicture();
   }
-
   goToPicture() {
     this.router.navigate(["medias", "pictures", "picture"]);
   }
@@ -40,7 +37,7 @@ export class CameraComponent implements OnInit, AfterViewInit {
       (camera: Camera) =>{
         this.havingError = camera.havingError;
         if(camera.havingError){
-          this.isLoading = this.loadingService.stopLoading();
+          this.isLoading = false;
           return;
         }
         this.myVideo.nativeElement.onloadedmetadata = () => {
@@ -57,7 +54,7 @@ export class CameraComponent implements OnInit, AfterViewInit {
             this.videoHeight = hi*screen.width/wi;
           }
           alert("finally "+this.videoWidth + "," + this.videoHeight);
-          this.isLoading = this.loadingService.stopLoading();
+          this.isLoading = false;
         };
         if ("srcObject" in this.myVideo.nativeElement) {
           this.myVideo.nativeElement.srcObject = camera.stream;
@@ -79,7 +76,7 @@ export class CameraComponent implements OnInit, AfterViewInit {
     );
   }
   ngAfterViewInit(): void{
-    this.isLoading = this.loadingService.startLoading();
+    this.isLoading = true;
     if (window["cordova"]) {;
       this.grantPermission();
     } else {

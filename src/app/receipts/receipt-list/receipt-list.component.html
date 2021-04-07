@@ -20,16 +20,16 @@
     <div class="container">
         <div class="row center">
           <div class="col s3">
-            <app-detail-file-btn (click)="goToReceiptDetail()"></app-detail-file-btn>
+            <a class="btn-floating green" (click)="goToReceiptDetail()"><i class="material-icons">details</i></a>
           </div>
           <div class="col s3">
-            <app-share-btn></app-share-btn>
+            <a class="btn-floating green"><i class="material-icons">share</i></a>
           </div>
           <div class="col s3">
-            <app-download-btn></app-download-btn>
+            <a class="btn-floating green"><i class="material-icons">file_download</i></a>
           </div>
           <div class="col s3">
-            <app-delete-btn (click)="deleteFiles()"></app-delete-btn>
+            <a class="btn-floating green" (click)="deleteFiles()"><i class="material-icons">delete</i></a>
           </div>
         </div>
     </div>

@@ -113,6 +113,8 @@ export class ReceiptService {
       this.setValue('exclTax', this.extractPrice(line));
     }
   }
+  // "TOTAL(\s)?([HORS(\s)TAXE]{5,}|HT)([\s\S]*?)(€|E|euros)"
+
   isKeyInclTax(line: string) {
     if (!this.isKeyExclTax(line) && line.match(/TOTA.\s*(TTC)*/i)) {
       return true;
@@ -231,6 +233,7 @@ export class ReceiptService {
   }
 
   startAnalyseExtract(form: Form, src: string){
+    this.receipt = new Receipt();
     this.affectValueId();
     this.setValuesForm(form, src);
     this.extractText();

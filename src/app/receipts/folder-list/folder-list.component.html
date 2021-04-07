@@ -1,22 +1,22 @@
-<!-- <div class="row">
-  <div class="col s2 offset-s10"> -->
-<app-add-folder-btn></app-add-folder-btn>
-    <!-- </div> -->
-    <!-- <div class="col s2">
-        <app-delete-folder-btn [folderName]="folder.name"></app-delete-folder-btn>
-    </div> -->
-<!-- </div>
-<br> -->
-<!-- <div class="container">
-    <div class="row">
-        <div class="col s6 m4" *ngFor="let folder of folderList">
-            <div class="card-panel teal" (click)="goToReceiptList(folder.name)">
-                {{folder.name}}
-                <a class="waves-effect waves-teal btn-flat">{{folder.name}}</a>
-            </div>
-        </div>
-    </div>
-</div> -->
+<a class="btn-floating btn-flat waves-effect waves-light green modal-trigger" href="#modal1" (click)="changeErrorMessage()"><i
+  class="material-icons">create_new_folder</i></a>
+
+<!-- Modal Structure -->
+<div id="modal1" #myModal class="modal">
+<div class="modal-content">
+<h5>Folder name: </h5>
+<div class="input-field col s6">
+    <input #myInput type="text" [(ngModel)]="newFolderName" (ngModelChange)="changeErrorMessage()"
+        placeholder="Nom du dossier"/>
+</div>
+<p class="error-color" *ngIf="errorMessage">{{errorMessage}}</p>
+</div>
+<div class="modal-footer">
+  <button (click)="addFolder()" [disabled]="errorMessage || !myInput.value"
+      class="modal-close waves-effect waves-green btn-flat">Ok</button>
+</div>
+</div>
+
 <div class="container">
     <div class="row ta-c">
         <div class="col s3" *ngFor="let folder of folderList">
@@ -24,8 +24,14 @@
                 <i class="material-icons icon-folder-color medium">folder</i>
                 <div class="folder-name">{{folder.name}}</div>
             </div>
-            <app-delete-btn (click)="deleteFolder(folder.name)"></app-delete-btn>
+            <a class="btn-floating green" (click)="deleteFolder(folder.name)"><i class="material-icons">delete</i></a>
         </div>
     </div>
 </div>
-<app-camera-btn (click)="goToCamera()"></app-camera-btn>
+
+<div class="action">
+  <button class="take-picture" (click)="goToCamera()"><span class="material-icons">camera</span></button>
+</div>
+
+
+

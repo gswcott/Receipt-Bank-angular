@@ -1,36 +1,40 @@
-<div>
+<main class="format-receipt">
   <div>
-    <img class="img-fit" [src]="receipt.imgSrc"/>
+    <div>
+      <img class="img-fit" [src]="receipt.imgSrc" alt = "Facture image">
+    </div>
+    <div class="row details">
+      <ul class="collection">
+        <li class="collection-item" *ngFor="let item of displayList">
+          <div class="row">
+            <div class="col s6 m6">{{item['label']}}</div>
+            <!-- (input)="onNameChange($event.target.innerHTML)" -->
+            <div #myDiv class="col s5 m5" [ngClass]="{'editable': item['editable']}" [attr.contenteditable]="item['editable']"
+            (blur)="desactiveDivEditable(item['attribut'], myDiv.innerText)">{{receipt[item['attribut']]}}</div>
+            <div class="col s1 m1">
+              <a (click)="activeDivEditable(item['attribut'], myDiv)"><i class="material-icons green">edit</i></a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div class="row details">
-    <ul class="collection">
-      <li class="collection-item" *ngFor="let item of displayList">
-        <div class="row">
-          <div class="col s6 m6">{{item['label']}}</div>
-          <!-- (input)="onNameChange($event.target.innerHTML)" -->
-          <div #myDiv class="col s5 m5" [ngClass]="{'editable': item['editable']}" [attr.contenteditable]="item['editable']"
-          (blur)="desactiveDivEditable(item['attribut'], myDiv.innerText)">{{receipt[item['attribut']]}}</div>
-          <div class="col s1 m1">
-            <a (click)="activeDivEditable(item['attribut'], myDiv)"><i class="material-icons green">edit</i></a>
+</main>
+<footer>
+  <div class="menu">
+    <div class="container">
+        <div class="row center">
+          <div class="col s4">
+            <a class="btn-floating green"><i class="material-icons">share</i></a>
+          </div>
+          <div class="col s4">
+            <a class="btn-floating green"><i class="material-icons">file_download</i></a>
+          </div>
+          <div class="col s4">
+            <a class="btn-floating green" (click)="deleteFile()"><i class="material-icons">delete</i></a>
           </div>
         </div>
-      </li>
-    </ul>
+    </div>
   </div>
-</div>
+</footer>
 
-<div class="menu">
-  <div class="container">
-      <div class="row center">
-        <div class="col s4">
-          <app-share-btn></app-share-btn>
-        </div>
-        <div class="col s4">
-          <app-download-btn></app-download-btn>
-        </div>
-        <div class="col s4">
-          <app-delete-btn (click)="deleteFile()"></app-delete-btn>
-        </div>
-      </div>
-  </div>
-</div>
